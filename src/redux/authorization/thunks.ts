@@ -19,10 +19,3 @@ export const loadUser = createAsyncThunk(
     return storageService.getUser();
   }),
 );
-
-export const logOut = createAsyncThunk<null>(
-  'auth/changeUserProject',
-  handleThunkApiError(async () => {
-    return storageService.logOut();
-  }),
-);

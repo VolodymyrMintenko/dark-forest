@@ -10,7 +10,7 @@ const getAuthRedirect = ({
   router,
 }: IAuthRedirect) => {
   if (!user && !unauthorizedRoutes.some((route) => routeComparison(route, location))) {
-    return router(`/library`, { replace: true });
+    return router(`/`, { replace: true });
   }
   if (user && !authorizedRoutes.some((route) => routeComparison(route, location))) {
     return router(`/`, { replace: true });
