@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@craco/craco": "^7.1.0",
     "@reduxjs/toolkit": "^2.5.1",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
@@ -18,7 +19,9 @@
     "eslint-config-airbnb": "^19.0.4",
     "history": "^5.3.0",
     "jwt-decode": "^4.0.0",
+    "module-alias": "^2.2.3",
     "react": "^19.0.0",
+    "react-app-rewired": "^2.2.1",
     "react-dom": "^19.0.0",
     "react-redux": "^9.2.0",
     "react-router": "^7.2.0",
@@ -29,10 +32,14 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
+    "eject": "react-app eject",
+    "lint": "eslint --ext .js,.jsx,.ts,.tsx src",
+    "lint:fix": "eslint --fix --ext .js,.jsx,.ts,.tsx src",
+    "postinstall": "husky install",
+    "setup": "rimraf .husky/pre-commit .husky/pre-push && husky add .husky/pre-commit \"npx lint-staged\" && husky add .husky/pre-push \"npx tsc --noEmit\" && cpy --rename=.env example.env ./"
   },
   "eslintConfig": {
     "extends": [
@@ -56,6 +63,7 @@
     "eslint": "^8.57.1",
     "eslint-plugin-react": "^7.37.4",
     "globals": "^15.15.0",
+    "prettier": "^3.5.2",
     "typescript-eslint": "^8.24.1"
   },
   "lint-staged": {
@@ -63,5 +71,12 @@
       "prettier --write",
       "eslint --fix"
     ]
+  },
+  "_moduleAliases": {
+    "@root": ".",
+    "@deep": "src/some/very/deep/directory/or/file",
+    "@my_module": "lib/some-file.js",
+    "something": "src/foo",
+    "@/": "./src/"
   }
 }
